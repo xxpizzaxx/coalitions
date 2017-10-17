@@ -55,7 +55,7 @@ object Coalitions {
   )
   lazy val DRF = Coalition(
     "DRF",
-    List(GeminateCo, DroneControlUnit, Legacy, SOLAR)
+    coalitions = List(GeminateCo, DroneControlUnit, Legacy, SOLAR)
   )
 
   lazy val Vanguard = Coalition(
@@ -67,7 +67,8 @@ object Coalitions {
       Alliance("Cohortes Triarii", 99005364),
       Alliance("Deus Vult.", 99006697),
       Alliance("Destiny's Call", 707482380),
-    )
+    ),
+    List(VanguardKrabs)
   )
 
   lazy val VanguardKrabs = Coalition(
@@ -90,7 +91,7 @@ object Coalitions {
       Alliance("Pandemic Legion", 386292982),
       Alliance("Northern Coalition.", 1727758877),
     ),
-    List(GOTG, KrabFam)
+    List(GOTG)
   )
 
   lazy val KrabFam = Coalition(
@@ -120,7 +121,6 @@ object Coalitions {
     List(KrabFam)
   )
 
-
   lazy val TheMemeperium = Coalition(
     "The Memeperium",
     List(
@@ -128,4 +128,19 @@ object Coalitions {
       Alliance("At Fanfest", 99007734),
     )
   )
+
+  lazy val Coalitions: Map[String, Coalition] = List(
+    GeminateCo,
+    DroneControlUnit,
+    Legacy,
+    SOLAR,
+    DRF,
+    Vanguard,
+    VanguardKrabs,
+    NCPL,
+    KrabFam,
+    GOTG,
+    TheMemeperium
+  ).groupBy(_.name).map { case (k, v) => (k, v.head) }
+
 }
