@@ -2,7 +2,6 @@ enablePlugins(sbtdocker.DockerPlugin, JavaAppPackaging)
 
 organization := "moe.pizza"
 name := "coalitions"
-version := "0.0.1-SNAPSHOT"
 scalaVersion := "2.12.3"
 
 val Http4sVersion = "0.17.4"
