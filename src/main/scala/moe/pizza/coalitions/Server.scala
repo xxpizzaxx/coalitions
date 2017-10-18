@@ -15,7 +15,7 @@ object BlazeExample extends StreamApp {
 
   override def stream(args: List[String]): Stream[Task, Nothing] =
     BlazeBuilder
-      .bindHttp(8081, "0.0.0.0")
+      .bindHttp(80, "0.0.0.0")
       .mountService(Service.withFallback(StaticContentService.routes)(CoalitionService.toService(middleware)))
       .serve
 }
