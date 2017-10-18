@@ -15,6 +15,7 @@ object CoalitionService extends RhoService {
   implicit def jsonEncoderHack[A](implicit e: Encoder[A]): EntityEncoder[A] =
     jsonEncoderOf(e)
   import Coalitions.{Coalitions => AllCoalitions}
+  case class Error(message: String)
 
   "Render the swagger UI if called directly" **
     GET |>> TemporaryRedirect(Uri(path = "/swagger-ui"))
@@ -24,7 +25,7 @@ object CoalitionService extends RhoService {
 
   "Get Coalition by name" **
     GET / "coalition" / 'name |>> { (name: String) =>
-    AllCoalitions.get(name).map(Ok(_)).getOrElse(NotFound(s"unable to find a coalition called $name"))
+    AllCoalitions.get(name).map(Ok(_)).getOrElse(NotFound(Error(s"unable to find a coalition called $name")))
 
   }
 

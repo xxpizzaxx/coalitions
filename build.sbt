@@ -1,3 +1,5 @@
+enablePlugins(sbtdocker.DockerPlugin, JavaAppPackaging)
+
 organization := "moe.pizza"
 name := "coalitions"
 version := "0.0.1-SNAPSHOT"
@@ -19,3 +21,15 @@ libraryDependencies ++= Seq(
  "io.circe"       %% "circe-generic"       % CirceVersion,
  "ch.qos.logback" %  "logback-classic"     % LogbackVersion
 )
+
+
+dockerfile in docker := {
+  val appDir: File = stage.value
+  val targetDir = "/app"
+
+  new Dockerfile {
+    from("java")
+    entryPoint(s"$targetDir/bin/${executableScriptName.value}")
+    copy(appDir, targetDir, chown = "daemon:daemon")
+  }
+}
