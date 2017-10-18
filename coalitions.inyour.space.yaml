@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
       - name: coalitions
-        image: andimiller/coalitions
+        image: andimiller/coalitions:0.0.2
         ports:
         - containerPort: 80
           protocol: "TCP"
