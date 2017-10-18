@@ -22,6 +22,7 @@ libraryDependencies ++= Seq(
  "ch.qos.logback" %  "logback-classic"     % LogbackVersion
 )
 
+packageName in Docker := "andimiller/coalitions"
 
 dockerfile in docker := {
   val appDir: File = stage.value
