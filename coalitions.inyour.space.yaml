@@ -8,7 +8,7 @@ metadata:
   name: coalitions
 spec:
   ports:
-  - port: 80
+  - port: 8080
   selector:
     app: coalitions
   type: NodePort
@@ -28,12 +28,12 @@ spec:
       - name: coalitions
         image: andimiller/coalitions:0.0.2
         ports:
-        - containerPort: 80
+        - containerPort: 8080
           protocol: "TCP"
         livenessProbe:
           httpGet:
             path: /
-            port: 80
+            port: 8080
           initialDelaySeconds: 15
           timeoutSeconds: 1
 ---
@@ -59,7 +59,7 @@ spec:
       - path: /
         backend:
           serviceName: coalitions
-          servicePort: 80
+          servicePort: 8080
 
 ---
 apiVersion: extensions/v1beta1
@@ -77,4 +77,4 @@ spec:
       - path: /
         backend:
           serviceName: coalitions
-          servicePort: 80
+          servicePort: 8080
