@@ -43,8 +43,8 @@ releaseProcess := Seq[ReleaseStep](
   runTest,
   setReleaseVersion,
   commitReleaseVersion,
-  tagRelease,
   ReleaseStep(releaseStepTask(publish in Docker)),
+  tagRelease,
   setNextVersion,
   commitNextVersion,
   pushChanges
