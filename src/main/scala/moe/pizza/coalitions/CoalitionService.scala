@@ -21,23 +21,26 @@ object CoalitionService extends RhoService {
     GET |>> TemporaryRedirect(Uri(path = "/swagger-ui"))
 
   "List Coalitions" **
-    GET / "coalition" |>> Ok(AllCoalitions.values.toList)
+    GET / "coalitions" / "" |>> Ok(AllCoalitions.values.toList)
 
   "Get Coalition by name" **
-    GET / "coalition" / 'name |>> { (name: String) =>
-    AllCoalitions.get(name).map(Ok(_)).getOrElse(NotFound(Error(s"unable to find a coalition called $name")))
+    GET / "coalitions" / 'name / "" |>> { (name: String) =>
+    AllCoalitions
+      .get(name)
+      .map(Ok(_))
+      .getOrElse(NotFound(Error(s"unable to find a coalition called $name")))
 
   }
 
   "Get the Coalitions for an Alliance, by ID" **
-    GET / "alliance" / pathVar[Long]("id") |>> { (id: Long) =>
+    GET / "alliances" / pathVar[Long]("id") / "" |>> { (id: Long) =>
     Ok(
       AllCoalitions.filter(_._2.alliances.exists(_.id == id))
     )
   }
 
   "Get the Coalitions for an Alliance, by Name" **
-    GET / "alliance" +? param[String]("name") |>> { (name: String) =>
+    GET / "alliances" +? param[String]("name") / "" |>> { (name: String) =>
     Ok(
       AllCoalitions.filter(_._2.alliances.exists(_.name == name))
     )
