@@ -40,7 +40,7 @@ object CoalitionService extends RhoService {
   }
 
   "Get the Coalitions for an Alliance, by Name" **
-    GET / "alliances" +? param[String]("name") / "" |>> { (name: String) =>
+    GET / "alliances" / "" +? param[String]("name") |>> { (name: String) =>
     Ok(
       AllCoalitions.filter(_._2.alliances.exists(_.name == name))
     )
